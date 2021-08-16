@@ -1,0 +1,264 @@
+[gd_scene load_steps=58 format=2]
+
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle down2.tres" type="Texture" id=1]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle down1.tres" type="Texture" id=2]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle down3.tres" type="Texture" id=3]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle down4.tres" type="Texture" id=4]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle up1.tres" type="Texture" id=5]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle up3.tres" type="Texture" id=6]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle left2.tres" type="Texture" id=7]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle left4.tres" type="Texture" id=8]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle up2.tres" type="Texture" id=9]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle right3.tres" type="Texture" id=10]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle up4.tres" type="Texture" id=11]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle right2.tres" type="Texture" id=12]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle left3.tres" type="Texture" id=13]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle right1.tres" type="Texture" id=14]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle left1.tres" type="Texture" id=15]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/idle right4.tres" type="Texture" id=16]
+[ext_resource path="res://Scripts/player_controller.gd" type="Script" id=17]
+[ext_resource path="res://Scripts/controlled_movement_ability.gd" type="Script" id=18]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk up1.tres" type="Texture" id=19]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk right3.tres" type="Texture" id=20]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk right1.tres" type="Texture" id=21]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk right2.tres" type="Texture" id=22]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk right4.tres" type="Texture" id=23]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk up2.tres" type="Texture" id=24]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk up3.tres" type="Texture" id=25]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk left1.tres" type="Texture" id=26]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk down3.tres" type="Texture" id=27]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk down1.tres" type="Texture" id=28]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk left4.tres" type="Texture" id=29]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk left3.tres" type="Texture" id=30]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk down4.tres" type="Texture" id=31]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk up4.tres" type="Texture" id=32]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk left2.tres" type="Texture" id=33]
+[ext_resource path="res://Sprites/character-spritesheet.sprites/walk down2.tres" type="Texture" id=34]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6, 3 )
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "idle-south"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "idle-west"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "idle-east"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "idle-north"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=6]
+blend_point_0/node = SubResource( 2 )
+blend_point_0/pos = Vector2( 0, 1 )
+blend_point_1/node = SubResource( 3 )
+blend_point_1/pos = Vector2( -1, 0 )
+blend_point_2/node = SubResource( 4 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 5 )
+blend_point_3/pos = Vector2( 0, -1 )
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "walk-west"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "walk-east"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "walk-north"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "walk-south"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=17]
+blend_point_0/node = SubResource( 13 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 14 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 15 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 16 )
+blend_point_3/pos = Vector2( 0, 1 )
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachine" id=7]
+states/idle/node = SubResource( 6 )
+states/idle/position = Vector2( 288, 85 )
+states/walking/node = SubResource( 17 )
+states/walking/position = Vector2( 644, 85 )
+transitions = [ "idle", "walking", SubResource( 18 ), "walking", "idle", SubResource( 19 ) ]
+start_node = "idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
+
+[sub_resource type="Animation" id=12]
+resource_name = "idle-east"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 14 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 16 ), ExtResource( 14 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "idle-north"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 5 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 2 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "idle-west"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 15 ), ExtResource( 7 ), ExtResource( 13 ), ExtResource( 8 ), ExtResource( 15 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "walk-east"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 20 ), ExtResource( 23 ), ExtResource( 21 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "walk-north"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 19 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 32 ), ExtResource( 19 ) ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "walk-south"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 28 ), ExtResource( 34 ), ExtResource( 27 ), ExtResource( 31 ), ExtResource( 28 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "walk-west"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 26 ), ExtResource( 33 ), ExtResource( 30 ), ExtResource( 29 ), ExtResource( 26 ) ]
+}
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 0, -8 )
+script = ExtResource( 17 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
+shape = SubResource( 1 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 7 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 8 )
+parameters/idle/blend_position = Vector2( 0, 0 )
+parameters/walking/blend_position = Vector2( 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/idle-east = SubResource( 12 )
+anims/idle-north = SubResource( 10 )
+anims/idle-south = SubResource( 11 )
+anims/idle-west = SubResource( 9 )
+anims/walk-east = SubResource( 20 )
+anims/walk-north = SubResource( 21 )
+anims/walk-south = SubResource( 22 )
+anims/walk-west = SubResource( 23 )
+
+[node name="ControlledMovementAbility" type="Node2D" parent="."]
+script = ExtResource( 18 )
