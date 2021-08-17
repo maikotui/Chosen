@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Sprites/character-spritesheet.sprites/idle down2.tres" type="Texture" id=1]
 [ext_resource path="res://Sprites/character-spritesheet.sprites/idle down1.tres" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Sprites/character-spritesheet.sprites/idle left1.tres" type="Texture" id=15]
 [ext_resource path="res://Sprites/character-spritesheet.sprites/idle right4.tres" type="Texture" id=16]
 [ext_resource path="res://scripts/player_controller.gd" type="Script" id=17]
+[ext_resource path="res://scripts/controlled_movement_ability.gd" type="Script" id=18]
 [ext_resource path="res://Sprites/character-spritesheet.sprites/walk up1.tres" type="Texture" id=19]
 [ext_resource path="res://Sprites/character-spritesheet.sprites/walk right3.tres" type="Texture" id=20]
 [ext_resource path="res://Sprites/character-spritesheet.sprites/walk right1.tres" type="Texture" id=21]
@@ -232,7 +233,7 @@ position = Vector2( 0, -8 )
 script = ExtResource( 17 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 6 )
+texture = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 8 )
@@ -255,3 +256,6 @@ anims/walk-east = SubResource( 20 )
 anims/walk-north = SubResource( 21 )
 anims/walk-south = SubResource( 22 )
 anims/walk-west = SubResource( 23 )
+
+[node name="ControlledMovementAbility" type="Node2D" parent="."]
+script = ExtResource( 18 )
