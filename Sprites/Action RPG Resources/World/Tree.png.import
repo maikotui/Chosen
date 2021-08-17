@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tree.png-a6ed4fac28e44528bc9139a2559fbfb2.stex"
+path="res://.import/Tree.png-4d7b1da63793e8049bc8ee8cc1e91373.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Action RPG Resources/World/Tree.png"
-dest_files=[ "res://.import/Tree.png-a6ed4fac28e44528bc9139a2559fbfb2.stex" ]
+source_file="res://sprites/Action RPG Resources/World/Tree.png"
+dest_files=[ "res://.import/Tree.png-4d7b1da63793e8049bc8ee8cc1e91373.stex" ]
 
 [params]
 

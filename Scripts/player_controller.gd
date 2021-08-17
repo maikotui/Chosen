@@ -5,31 +5,48 @@ enum MovementState {
 	IDLE = 0, 
 	WALKING,
 	ATTACKING,
+	STUNNED,
 }
 
-const StateMachine = preload("res://Scripts/Utilities/state_machine.gd")
+enum PlayerState {
+	NORMAL = 0,
+	INVINCIBLE,
+	DEAD,
+}
 
-onready var anim_tree: AnimationTree = get_node("AnimationTree")
-onready var anim_state_machine: AnimationNodeStateMachinePlayback = anim_tree["parameters/playback"]
+const StateMachine = preload("res://scripts/utilities/state_machine.gd")
 
+var anim_tree: AnimationTree
+var anim_state_machine: AnimationNodeStateMachinePlayback
+
+export var is_animated: bool = true
 export var speed: int = 200
 
 var direction: Vector2 = Vector2()
 var velocity: Vector2 = Vector2()
 var movement_state: StateMachine
+var player_state: StateMachine
 var movement_multiplier: float = 1.0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if is_animated:
+		anim_tree = get_node("AnimationTree")
+		anim_state_machine = anim_tree["parameters/playback"]
+
 	movement_state = StateMachine.new()
 	movement_state.state = MovementState.IDLE
 	var _err = movement_state.connect("state_changed", self, "_on_movement_state_change")
-	
+
+	player_state = StateMachine.new()
+	player_state.state = PlayerState.NORMAL
+	_err = player_state.connect("state_changed", self, "_on_player_state_change")
+
 	# Initialize any abilities
 	for child in self.get_children():
 		if child.has_method("_ability_ready"):
-			child._ability_ready()
+			child._ability_ready(self)
 
 
 # Used for processing animations / non-physics processes
@@ -38,10 +55,11 @@ func _process(delta):
 	for child in self.get_children():
 		if child.has_method("_ability_process"):
 			child._ability_process(delta)
-	
+
 	# Update any animation parameters
-	anim_tree['parameters/idle/blend_position'] = direction
-	anim_tree['parameters/walking/blend_position'] = direction
+	if is_animated:
+		anim_tree['parameters/idle/blend_position'] = direction
+		anim_tree['parameters/walking/blend_position'] = direction
 
 
 # Used to process physics
@@ -52,4 +70,9 @@ func _physics_process(delta):
 
 
 func _on_movement_state_change(sm: StateMachine):
-	anim_state_machine.travel(MovementState.keys()[sm.state].to_lower())
+	if is_animated:
+		anim_state_machine.travel(MovementState.keys()[sm.state].to_lower())
+
+
+func _on_player_state_change(sm: StateMachine):
+	pass

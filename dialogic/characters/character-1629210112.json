@@ -1,0 +1,20 @@
+{
+	"color": "#ff068d02",
+	"description": "",
+	"display_name": "Mentor",
+	"display_name_bool": true,
+	"id": "character-1629210112.json",
+	"mirror_portraits": false,
+	"name": "mentor",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": 0,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": ""
+		}
+	],
+	"scale": 100
+}

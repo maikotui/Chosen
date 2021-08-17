@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DirtTileset.png-f2fff052fe8405176e9a28bc9ade281b.stex"
+path="res://.import/DirtTileset.png-e4358eae82f736aba9fae10368287073.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Action RPG Resources/World/DirtTileset.png"
-dest_files=[ "res://.import/DirtTileset.png-f2fff052fe8405176e9a28bc9ade281b.stex" ]
+source_file="res://sprites/Action RPG Resources/World/DirtTileset.png"
+dest_files=[ "res://.import/DirtTileset.png-e4358eae82f736aba9fae10368287073.stex" ]
 
 [params]
 

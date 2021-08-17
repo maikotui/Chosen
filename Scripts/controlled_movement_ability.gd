@@ -5,16 +5,17 @@ const MovementState = PlayerController.MovementState
 
 export var speed: int = 200
 export var idle_threshold: float = 0.1
-export(Array, PlayerController.MovementState) var blocking_states: Array
+export(Array, PlayerController.MovementState) var blocking_states: Array = [MovementState.STUNNED]
 
-onready var player_controller: PlayerController = get_parent()
+var player_controller: PlayerController
 
 var can_move: bool 
 
 
-func _ability_ready():
+func _ability_ready(controller):
 	var _err = $"/root/InputManager".connect("movement_input",self,"_on_movement_input")
 	
+	player_controller = controller
 	_err = player_controller.movement_state.connect("state_changed", self, "_on_state_changed")
 	can_move = not blocking_states.has(player_controller.movement_state.state)
 
@@ -29,7 +30,7 @@ func _on_movement_input(direction: Vector2):
 		if player_controller.movement_state.state != MovementState.ATTACKING:
 			player_controller.direction = direction.normalized()
 			player_controller.movement_state.state = MovementState.WALKING
-		player_controller.velocity = (direction.normalized() * speed)
+		player_controller.velocity = (direction * speed)
 		
 
 

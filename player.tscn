@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Sprites/character-spritesheet.sprites/idle down2.tres" type="Texture" id=1]
 [ext_resource path="res://Sprites/character-spritesheet.sprites/idle down1.tres" type="Texture" id=2]
@@ -16,8 +16,7 @@
 [ext_resource path="res://Sprites/character-spritesheet.sprites/idle right1.tres" type="Texture" id=14]
 [ext_resource path="res://Sprites/character-spritesheet.sprites/idle left1.tres" type="Texture" id=15]
 [ext_resource path="res://Sprites/character-spritesheet.sprites/idle right4.tres" type="Texture" id=16]
-[ext_resource path="res://Scripts/player_controller.gd" type="Script" id=17]
-[ext_resource path="res://Scripts/controlled_movement_ability.gd" type="Script" id=18]
+[ext_resource path="res://scripts/player_controller.gd" type="Script" id=17]
 [ext_resource path="res://Sprites/character-spritesheet.sprites/walk up1.tres" type="Texture" id=19]
 [ext_resource path="res://Sprites/character-spritesheet.sprites/walk right3.tres" type="Texture" id=20]
 [ext_resource path="res://Sprites/character-spritesheet.sprites/walk right1.tres" type="Texture" id=21]
@@ -60,44 +59,43 @@ blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 5 )
 blend_point_3/pos = Vector2( 0, -1 )
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "walk-west"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "walk-east"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "walk-north"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "walk-south"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=17]
-blend_point_0/node = SubResource( 13 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=11]
+blend_point_0/node = SubResource( 7 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 14 )
+blend_point_1/node = SubResource( 8 )
 blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 15 )
+blend_point_2/node = SubResource( 9 )
 blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 16 )
+blend_point_3/node = SubResource( 10 )
 blend_point_3/pos = Vector2( 0, 1 )
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
 
-[sub_resource type="AnimationNodeStateMachine" id=7]
+[sub_resource type="AnimationNodeStateMachine" id=14]
 states/idle/node = SubResource( 6 )
 states/idle/position = Vector2( 288, 85 )
-states/walking/node = SubResource( 17 )
+states/walking/node = SubResource( 11 )
 states/walking/position = Vector2( 644, 85 )
-transitions = [ "idle", "walking", SubResource( 18 ), "walking", "idle", SubResource( 19 ) ]
+transitions = [ "idle", "walking", SubResource( 12 ), "walking", "idle", SubResource( 13 ) ]
 start_node = "idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=15]
 
-[sub_resource type="Animation" id=12]
-resource_name = "idle-east"
+[sub_resource type="Animation" id=16]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -113,8 +111,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 14 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 16 ), ExtResource( 14 ) ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "idle-north"
+[sub_resource type="Animation" id=17]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -130,7 +127,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 5 ), ExtResource( 9 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 5 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=18]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -146,8 +143,7 @@ tracks/0/keys = {
 "values": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 2 ) ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "idle-west"
+[sub_resource type="Animation" id=19]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -236,29 +232,26 @@ position = Vector2( 0, -8 )
 script = ExtResource( 17 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 9 )
+texture = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 8 )
 shape = SubResource( 1 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 7 )
+tree_root = SubResource( 14 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 8 )
+parameters/playback = SubResource( 15 )
 parameters/idle/blend_position = Vector2( 0, 0 )
 parameters/walking/blend_position = Vector2( 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/idle-east = SubResource( 12 )
-anims/idle-north = SubResource( 10 )
-anims/idle-south = SubResource( 11 )
-anims/idle-west = SubResource( 9 )
+anims/idle-east = SubResource( 16 )
+anims/idle-north = SubResource( 17 )
+anims/idle-south = SubResource( 18 )
+anims/idle-west = SubResource( 19 )
 anims/walk-east = SubResource( 20 )
 anims/walk-north = SubResource( 21 )
 anims/walk-south = SubResource( 22 )
 anims/walk-west = SubResource( 23 )
-
-[node name="ControlledMovementAbility" type="Node2D" parent="."]
-script = ExtResource( 18 )

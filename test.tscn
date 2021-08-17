@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="GraphEdit" type="GraphEdit"]
+margin_left = 0.736786
+margin_top = 0.606636
+margin_right = 481.737
+margin_bottom = 269.607
+scroll_offset = Vector2( -40, -40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
